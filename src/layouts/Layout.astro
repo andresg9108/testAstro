@@ -1,0 +1,100 @@
+---
+import { 
+	ViewTransitions, 
+	slide 
+} from 'astro:transitions'
+import Counter from '../components/Counter'
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+
+		<ViewTransitions />
+	</head>
+	<body>
+		<main>
+			<slot>Slot por defecto.</slot>
+			<slot name="slot2">Slot #2.</slot>
+
+			<Counter 
+				client:visible 
+				transition:persist 
+				transition:animate="slide" 
+			/>
+			<Counter 
+				client:visible 
+				transition:persist 
+				
+			/>
+
+			<div
+				class="holamundo" 
+				transition:animate="slide" 
+			>
+				<div>transition:animate</div>
+				<div>slide</div>
+			</div>
+
+			<div
+				class="holamundo" 
+				transition:animate={slide({ duration: "2s" })}
+			>
+				<div>transition:animate</div>
+				<div>{`slide({ duration: "2s" })`}</div>
+			</div>
+		</main>
+	</body>
+</html>
+<style is:global>
+	:root {
+		color-scheme: light dark;
+		--text-color: #000;
+		--background-color: #fff;
+	}
+	
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--text-color: #fff;
+			--background-color: #333;
+		}
+	}
+
+	body{
+		font-family: Arial;
+		color: var(--text-color);
+		background-color: var(--background-color);
+	}
+
+	.holamundo{
+		display: flex;
+		
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+
+		margin: 20px;
+		background-color: #aa0000;
+	}
+
+	.holamundo > div{
+		padding: 15px;
+		margin: 10px;
+		border-radius: 20%;
+		background-color: #550000;
+	}
+</style>

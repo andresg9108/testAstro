@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Title from '../../components/Title.astro';
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.params;
+
+export const getStaticPaths = () => ([{
+  params: {
+    id: 'rutadinamica'
+  }
+}]);
+---
+
+<Layout title="Welcome to Astro.">
+  <a href='../'>Atrás</a>
+  <Title text={ id } />
+  <p slot="slot2">{ id }</p>
+</Layout>
+
+<style>
+</style>

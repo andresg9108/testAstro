@@ -1,0 +1,15 @@
+---
+interface Props {
+	text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<h1 class="h1-Title">{ text }</h1>
+
+<style>
+	.h1-Title{
+		color: #ff8888;
+	}
+</style>
